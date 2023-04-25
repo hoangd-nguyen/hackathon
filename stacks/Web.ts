@@ -46,8 +46,6 @@ const fetchEnvFromSsm = async (context: StackContext) => {
   return [
     "VITE_APP_API_URL",
     "VITE_APP_REGION",
-    "VITE_APP_USER_POOL_ID",
-    "VITE_APP_USER_POOL_CLIENT_ID",
   ].reduce(async (env, name) => {
     (await env)[name] = await fetchSsmParam(`${ssmNamePrefix}${name}`);
     return await env;
