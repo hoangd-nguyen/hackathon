@@ -3,7 +3,6 @@ import { SSTConfig } from "sst";
 
 import { Api } from "./stacks/Api.js";
 import { ApiRoutes } from "./stacks/ApiRoutes.js";
-import { Auth } from "./stacks/Auth";
 import { Database } from "./stacks/Database.js";
 import { Web } from "./stacks/Web";
 import { WebEnv } from "./stacks/WebEnv";
@@ -44,7 +43,6 @@ export default {
     if (!stack) {
       await app
         .stack(Database)
-        .stack(Auth)
         .stack(Api)
         .stack(ApiRoutes)
         .stack(WebEnv)
@@ -54,7 +52,6 @@ export default {
     } else if (stack === BACKEND_STACK_NAME) {
       app
         .stack(Database)
-        .stack(Auth)
         .stack(Api)
         .stack(ApiRoutes)
         .stack(WebEnv);
