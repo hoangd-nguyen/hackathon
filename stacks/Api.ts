@@ -8,9 +8,6 @@ export function Api(context: StackContext) {
       allowHeaders: ["*"],
       allowOrigins: ["*"],
     },
-    defaults: {
-      authorizer: "Authorizer",
-    },
   });
 
   context.stack.addOutputs({
