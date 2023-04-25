@@ -29,7 +29,8 @@
     "vitest": "^0.27.1"
   },
   "workspaces": [
-    "services"
+    "services",
+    "web"
   ],
   "dependencies": {
     "ajv-formats": "^2.1.1",
