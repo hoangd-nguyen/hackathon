@@ -11,7 +11,7 @@ export async function up(db) {
     .execute();
   
   await db
-    .insertInto("map")
+    .insertInto("counters")
     .values({
       key: "default",
       value: 0,
@@ -25,5 +25,5 @@ export async function up(db) {
  * @param db {Kysely<any>}
  */
 export async function down(db) {
-  await db.schema.dropTable("map").execute();
+  await db.schema.dropTable("counters").execute();
 }
