@@ -20,7 +20,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1-node16
         with:
-          role-to-assume: arn:aws:iam::584897248542:role/GithubActions
+          role-to-assume: arn:aws:iam::092473279400:role/GitHubActions
           aws-region: eu-central-1
 
       - name: Install Node.js
@@ -52,5 +52,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Deploy
-        run: npx sst deploy --stage prod
+      - name: Deploy backend
+        run: export STACK=backend && export SSM_PREFIX=/hackathon/prod/ && npx sst deploy --stage hackathon
+
+      - name: Deploy frontend
+        run: export STACK=frontend && export SSM_PREFIX=/hackathon/prod/ && npx sst deploy --stage hackathon-fe
