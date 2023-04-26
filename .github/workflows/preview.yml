@@ -39,17 +39,17 @@ jobs:
         run: npm install
 
       - name: Deploy backend
-        if: contains(['opened', 'reopened', 'synchronize'], github.event.action)
+        if: ${{ contains(['opened', 'reopened', 'synchronize'], github.event.action) }}
         run: export STACK=backend && export SSM_PREFIX=/hackathon/$Backend/ && npx sst deploy --stage $Backend
 
       - name: Remove backend
-        if: github.event.action == "closed" && !github.event.pull_request.merged
+        if: ${{ github.event.action == "closed" && !github.event.pull_request.merged }}
         run: npx sst remove --stage $Backend
 
       - name: Deploy frontend
-        if: contains(['opened', 'reopened', 'synchronize'], github.event.action)
+        if: ${{ contains(['opened', 'reopened', 'synchronize'], github.event.action) }}
         run: export STACK=frontend && export SSM_PREFIX=/hackathon/$Frontend/ && npx sst deploy --stage $Frontend
 
       - name: Remove frontend
-        if: github.event.action == "closed" && !github.event.pull_request.merged
+        if: ${{ github.event.action == "closed" && !github.event.pull_request.merged }}
         run: npx sst remove --stage $Frontend
