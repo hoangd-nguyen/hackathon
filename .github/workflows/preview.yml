@@ -1,4 +1,4 @@
-name: "Deploy PR previews"
+name: "Deploy PR preview"
 
 concurrency: preview-${{ github.ref }}
 
@@ -62,4 +62,4 @@ jobs:
 
       - name: Deploy frontend
         if: contains(fromJSON('["opened", "reopened", "synchronize"]'), github.event.action)
-        run: export STACK=frontend && export SSM_PREFIX=/hackathon/preview/ && npx sst deploy --stage preview
+        run: export STACK=frontend && export SSM_PREFIX=/hackathon/preview/ && npx sst deploy --stage preview-fe
