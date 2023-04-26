@@ -52,7 +52,7 @@ jobs:
         run: pnpm install
 
       - name: Deploy backend
-        run: export STACK=backend && export SSM_PREFIX=/hackathon/prod && pnpm run deploy:prepare && pnpm run deploy:sst --stage prod
+        run: export STACK=backend && export SSM_PREFIX=/hackathon/prod/ && pnpm run deploy:prepare && pnpm run deploy:sst --stage prod
 
       - name: Deploy frontend
-        run: export STACK=frontend && export SSM_PREFIX=/hackathon/prod/ &&  pnpm run deploy:sst --stage prod
+        run: export STACK=frontend && export SSM_PREFIX=/hackathon/prod/ && pnpm run deploy:sst --stage prod
