@@ -1,0 +1,47 @@
+name: "Deploy PR previews"
+
+concurrency: preview-${{ github.ref_name }}
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    env:
+      Frontend: preview-${{ github.ref_name }}-frontend
+      Backend: preview-${{ github.ref_name }}-backend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          role-to-assume: arn:aws:iam::092473279400:role/GitHubActions
+          aws-region: eu-central-1
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy backend
+        if: contains(fromJSON('["opened", "reopened", "synchronize"]'), github.event.action)
+        run: export STACK=backend && export SSM_PREFIX=/hackathon/$Backend/ && npx sst deploy --stage $Backend
+
+      - name: Deploy frontend
+        if: contains(fromJSON('["opened", "reopened", "synchronize"]'), github.event.action)
+        run: export STACK=frontend && export SSM_PREFIX=/hackathon/$Frontend/ && npx sst deploy --stage $Frontend
