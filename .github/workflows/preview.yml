@@ -65,5 +65,5 @@ jobs:
         run: export STACK=frontend && export SSM_PREFIX=/hackathon/preview/ && pnpm run deploy:sst --stage preview
 
       - name: Remove preview
-        if: github.event.action == "closed" && !github.event.pull_request.merged
+        if: contains(fromJSON('["closed"]'), github.event.action) && !github.event.pull_request.merged
         run: pnpm remove --stage preview
