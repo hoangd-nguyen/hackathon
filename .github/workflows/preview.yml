@@ -1,6 +1,6 @@
 name: "Deploy PR previews"
 
-concurrency: preview-${{ github.ref_name }}
+concurrency: preview-${{ github.ref }}
 
 on:
   pull_request:
@@ -17,9 +17,6 @@ permissions:
 jobs:
   deploy-preview:
     runs-on: ubuntu-latest
-    env:
-      Frontend: preview-${{ github.ref_name }}-frontend
-      Backend: preview-${{ github.ref_name }}-backend
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -61,8 +58,8 @@ jobs:
 
       - name: Deploy backend
         if: contains(fromJSON('["opened", "reopened", "synchronize"]'), github.event.action)
-        run: export STACK=backend && export SSM_PREFIX=/hackathon/$Backend/ && npx sst deploy --stage $Backend
+        run: export STACK=backend && export SSM_PREFIX=/hackathon/preview/ && npx sst deploy --stage preview
 
       - name: Deploy frontend
         if: contains(fromJSON('["opened", "reopened", "synchronize"]'), github.event.action)
-        run: export STACK=frontend && export SSM_PREFIX=/hackathon/$Frontend/ && npx sst deploy --stage $Frontend
+        run: export STACK=frontend && export SSM_PREFIX=/hackathon/preview/ && npx sst deploy --stage preview
