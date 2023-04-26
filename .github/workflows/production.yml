@@ -10,8 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  release:
-    name: "Release"
+  deploy-production:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,7 +31,7 @@ jobs:
         run: npm install
 
       - name: Deploy backend
-        run: export STACK=backend && export SSM_PREFIX=/hackathon/prod/ && npx sst deploy --stage hackathon
+        run: export STACK=backend && export SSM_PREFIX=/hackathon/prod/ && npx sst deploy --stage prod
 
       - name: Deploy frontend
-        run: export STACK=frontend && export SSM_PREFIX=/hackathon/prod/ && npx sst deploy --stage hackathon-fe
+        run: export STACK=frontend && export SSM_PREFIX=/hackathon/prod/ && npx sst deploy --stage prod-fe
