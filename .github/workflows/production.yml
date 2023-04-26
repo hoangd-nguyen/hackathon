@@ -20,7 +20,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1-node16
         with:
           role-to-assume: arn:aws:iam::092473279400:role/GitHubActions
-          aws-region: eu-central-1
+          aws-region: eu-west-1
 
       - name: Install Node.js
         uses: actions/setup-node@v3
