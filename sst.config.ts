@@ -6,11 +6,11 @@ const PROFILE = {
 }
 
 const REGION = {
-  default: "us-east-1"
+  default: "eu-west-1"
 }
 
 const PROJECT_NAME = "hackathon";
-const AWS_REGION = "eu-central-1";
+const AWS_REGION = "eu-west-1";
 
 export default {
   config(input) {
