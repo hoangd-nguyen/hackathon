@@ -66,8 +66,8 @@ jobs:
 
       - name: Remove backend
         if: contains(fromJSON('["closed"]'), github.event.action) && !github.event.pull_request.merged
-        run: export STACK=backend && export SSM_PREFIX=/hackathon/preview && npx sst remove --stage preview
+        run: export STACK=backend && export SSM_PREFIX=/hackathon/preview/ && npx sst remove --stage preview
 
       - name: Remove frontend
         if: contains(fromJSON('["closed"]'), github.event.action) && !github.event.pull_request.merged
-        run: export STACK=frontend && export SSM_PREFIX=/hackathon/preview && npx sst remove --stage preview
+        run: export STACK=frontend && export SSM_PREFIX=/hackathon/preview/ && npx sst remove --stage preview
