@@ -1,4 +1,4 @@
-import { SSM } from "aws-sdk";
+import AWS from "aws-sdk";
 import { StackContext, StaticSite, use } from "sst/constructs";
 
 import { getSsmPrefix } from "./utils/getSsmPrefix";
@@ -53,7 +53,7 @@ const fetchEnvFromSsm = async (context: StackContext) => {
 };
 
 const fetchSsmParam = async (name: string) => {
-  const resp = await new SSM()
+  const resp = await new AWS.SSM()
     .getParameter({
       Name: name,
     })
