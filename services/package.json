@@ -1,9 +1,0 @@
-{
-  "name": "@hackathon/services",
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {},
-  "devDependencies": {
-    "@types/aws-lambda": "^8.10.109"
-  }
-}

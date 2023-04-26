@@ -1,4 +1,9 @@
 {
-  "extends": "@tsconfig/node16/tsconfig.json",
-  "include": ["stacks"]
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "outDir": "./dist"
+  },
+  "include": ["stacks"],
+  "references": [{ "path": "./common" }, { "path": "./backend" }]
 }
