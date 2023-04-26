@@ -64,6 +64,10 @@ jobs:
         if: contains(fromJSON('["opened", "reopened", "synchronize"]'), github.event.action)
         run: export STACK=frontend && export SSM_PREFIX=/hackathon/preview/ && pnpm run deploy:sst --stage preview
 
-      - name: Remove preview
+      - name: Remove backend
         if: contains(fromJSON('["closed"]'), github.event.action) && !github.event.pull_request.merged
-        run: pnpm remove --stage preview
+        run: export STACK=backend && export SSM_PREFIX=/hackathon/preview && npx sst remove --stage preview
+
+      - name: Remove frontend
+        if: contains(fromJSON('["closed"]'), github.event.action) && !github.event.pull_request.merged
+        run: export STACK=frontend && export SSM_PREFIX=/hackathon/preview && npx sst remove --stage preview
